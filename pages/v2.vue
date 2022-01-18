@@ -20,13 +20,6 @@
           <div v-for="path in paths" v-bind:key="path.index" class="path">
             <b-overlay :show="path.locked" rounded="sm" opacity="0.90">
               <b-card :aria-hidden="!path.locked ? 'true' : null">
-                <h1>
-                  {{ path.name }}
-                </h1>
-                <div class="subheader">
-                  {{ path.unitCount }} Units &bull; {{ path.assessmentCount }} Assessments
-                </div>
-
                 <b-card v-for="course in path.courses" v-bind:key="course.index" class="course" v-show="path.locked == false">
                   <div class="courseTitle">
                     <div v-if="course.complete" class="complete">
@@ -657,166 +650,6 @@ export default {
               ]
             }
           ]
-        }, {
-          name: "Front-End Engineering",
-          locked: true,
-          unitCount: 15,
-          assessmentCount: 2,
-          courses: [
-            {
-              name: "Dummy text",
-              complete: false,
-              units: [
-                {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }, {
-          name: "Back-End Engineering",
-          locked: true,
-          unitCount: 17,
-          assessmentCount: 3,
-          courses: [
-            {
-              name: "Dummy text",
-              complete: false,
-              units: [
-                {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
         }
       ]
     }
@@ -862,6 +695,10 @@ body {
 
 .courseTitle h3 {
   margin: 0px;
+}
+
+.course {
+  border: 0px;
 }
 
 .course .complete svg {
