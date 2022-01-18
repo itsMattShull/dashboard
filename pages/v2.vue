@@ -17,33 +17,33 @@
 
       <b-row class="content">
         <b-col>
-          <div v-for="path in paths" v-bind:key="path.index" class="path">
-            <b-overlay :show="path.locked" rounded="sm" opacity="0.90">
-              <b-card :aria-hidden="!path.locked ? 'true' : null">
-                <b-card v-for="course in path.courses" v-bind:key="course.index" class="course" v-show="path.locked == false">
+          <div v-for="course in courses" v-bind:key="course.index" class="path">
+            <b-overlay :show="course.locked" rounded="sm" opacity="0.90">
+              <b-card :aria-hidden="!course.locked ? 'true' : null">
+                <b-card v-for="module in course.modules" v-bind:key="module.index" class="course" v-show="course.locked == false">
                   <div class="courseTitle">
-                    <div v-if="course.complete" class="complete">
+                    <div v-if="module.complete" class="complete">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
                     </div>
                     <h3>
-                      {{ course.name }}
+                      {{ module.name }}
                     </h3>
                     <div class="courseSubheader">
-                      <div v-if="!course.viewCompleted">
-                        <span @click="course.viewCompleted=!course.viewCompleted">
+                      <div v-if="!module.viewCompleted">
+                        <span @click="module.viewCompleted=!module.viewCompleted">
                           &bull; show completed
                         </span>
                       </div>
                       <div v-else>
-                        <span @click="course.viewCompleted=!course.viewCompleted">
+                        <span @click="module.viewCompleted=!module.viewCompleted">
                           &bull; hide completed
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <b-list-group v-show="course.complete == false || course.viewCompleted == true">
-                    <b-list-group-item v-for="unit in course.units" v-bind:key="unit.index" class="unit">
+                  <b-list-group v-show="module.complete == false || module.viewCompleted == true">
+                    <b-list-group-item v-for="unit in module.units" v-bind:key="unit.index" class="unit">
                       <b-container id="main">
                         <b-row>
                           <b-col>
@@ -56,9 +56,9 @@
                             <div class="unitProgress">
                               <div>{{ unit.ttc }}</div>
                               <div>
-                                <b-progress :max="unit.assignmentCount" height="22px" class="w-100">
-                                  <b-progress-bar style="overflow: visible" :value="unit.completedAssignmentCount" :variant="unit.completedAssignmentCount==unit.assignmentCount ? 'success' : ''">
-                                    <span>Progress: <strong>{{ unit.completedAssignmentCount }} / {{ unit.assignmentCount }} assignments</strong></span>
+                                <b-progress :max="unit.lessonCount" height="22px" class="w-100">
+                                  <b-progress-bar style="overflow: visible" :value="unit.completedLessonCount" :variant="unit.completedLessonCount==unit.lessonCount ? 'success' : ''">
+                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} lessons</strong></span>
                                   </b-progress-bar>
                                 </b-progress>
                               </div>
@@ -90,14 +90,14 @@
 export default {
   data() {
     return {
-      assignmentTypes: ["reading", "video", "quiz", "project", "coding"],
-      paths: [
+      lessonTypes: ["reading", "video", "quiz", "project", "coding"],
+      courses: [
         {
           name: "Web Development Fundamentals",
           locked: false,
           unitCount: 10,
           assessmentCount: 2,
-          courses: [
+          modules: [
             {
               name: "Getting Started at App Academy",
               complete: true,
@@ -107,9 +107,9 @@ export default {
                   name: "Getting Started",
                   ttc: "49 mins",
                   complete: true,
-                  assignmentCount: 8,
-                  completedAssignmentCount: 8,
-                  assignments: [
+                  lessonCount: 8,
+                  completedLessonCount: 8,
+                  lessons: [
                     {
                       name: "How to Learn at App Academy",
                       complete: true,
@@ -158,16 +158,16 @@ export default {
               name: "Javascript Fundamentals",
               complete: false,
               viewCompleted: false,
-              assignmentCount: 45,
-              completedAssignmentCount: 17,
+              lessonCount: 45,
+              completedLessonCount: 17,
               units: [
                 {
                   name: "Intro to Javascript",
                   complete: true,
                   ttc: "1 hr and 29 mins",
-                  assignmentCount: 18,
-                  completedAssignmentCount: 18,
-                  assignments: [
+                  lessonCount: 18,
+                  completedLessonCount: 18,
+                  lessons: [
                     {
                       name: `A Particularly Long and Detailed "Hello World!"`,
                       complete: true,
@@ -264,9 +264,9 @@ export default {
                   name: "Intro to Functions",
                   complete: false,
                   ttc: "1 hr and 46 mins",
-                  assignmentCount: 17,
-                  completedAssignmentCount: 4,
-                  assignments: [
+                  lessonCount: 17,
+                  completedLessonCount: 4,
+                  lessons: [
                     {
                       name: `Functions`,
                       complete: true,
@@ -358,9 +358,9 @@ export default {
                   name: "Intro to Control Flow",
                   complete: false,
                   ttc: "39 mins",
-                  assignmentCount: 7,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 7,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Conditionals`,
                       complete: false,
@@ -402,9 +402,9 @@ export default {
                   name: "Javascript Fundamentals Assessment",
                   complete: false,
                   ttc: "3 hrs",
-                  assignmentCount: 3,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Assessment Expectations`,
                       complete: false,
@@ -428,16 +428,16 @@ export default {
               name: "HTML and CSS Fundamentals",
               complete: false,
               viewCompleted: false,
-              assignmentCount: 34,
-              completedAssignmentCount: 0,
+              lessonCount: 34,
+              completedLessonCount: 0,
               units: [
                 {
                   name: "HTML Basics",
                   complete: false,
                   ttc: "1 hr and 58 mins",
-                  assignmentCount: 11,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 11,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Hello HTML`,
                       complete: false,
@@ -499,9 +499,9 @@ export default {
                   name: "HTML Forms",
                   complete: false,
                   ttc: "2 hrs and 3 mins",
-                  assignmentCount: 5,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 5,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `HTML Forms Overview`,
                       complete: false,
@@ -533,9 +533,9 @@ export default {
                   name: "CSS Basics",
                   complete: false,
                   ttc: "1 hr and 22 mins",
-                  assignmentCount: 6,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 6,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Intro to CSS`,
                       complete: false,
@@ -572,9 +572,9 @@ export default {
                   name: "CSS Layout & Transitions",
                   complete: false,
                   ttc: "3 hrs",
-                  assignmentCount: 9,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 9,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `The Box Model`,
                       complete: false,
@@ -626,9 +626,9 @@ export default {
                   name: "HTML & CSS Assessment",
                   complete: false,
                   ttc: "3 hrs",
-                  assignmentCount: 3,
-                  completedAssignmentCount: 0,
-                  assignments: [
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Assessment Expectations`,
                       complete: false,
