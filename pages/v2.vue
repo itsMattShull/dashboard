@@ -162,7 +162,7 @@ export default {
               completedLessonCount: 17,
               units: [
                 {
-                  name: "Intro to Javascript",
+                  name: "Data Types",
                   complete: true,
                   ttc: "1 hr and 29 mins",
                   lessonCount: 18,
@@ -355,7 +355,7 @@ export default {
                     }
                   ]
                 }, {
-                  name: "Intro to Control Flow",
+                  name: "Control Flow",
                   complete: false,
                   ttc: "39 mins",
                   lessonCount: 7,
@@ -399,7 +399,7 @@ export default {
                     }
                   ]
                 }, {
-                  name: "Javascript Fundamentals Assessment",
+                  name: "Javascript Fundamentals Formative Quiz",
                   complete: false,
                   ttc: "3 hrs",
                   lessonCount: 3,
