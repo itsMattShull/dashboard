@@ -17,57 +17,55 @@
 
       <b-row class="content">
         <b-col>
-          <div v-for="path in paths" v-bind:key="path.index" class="path">
-            <b-overlay :show="path.locked" rounded="sm" opacity="0.90" :class="{ locked: path.locked }">
-              <b-card :aria-hidden="!path.locked ? 'true' : null">
-                <h1>
-                  {{ path.name }}
-                </h1>
-                <div class="subheader">
-                  {{ path.unitCount }} Units &bull; {{ path.assessmentCount }} Assessments
-                </div>
-
-                <b-card v-for="course in path.courses" v-bind:key="course.index" class="course" v-show="path.locked == false">
+          <div v-for="course in courses" v-bind:key="course.index" class="path">
+            <b-overlay :show="course.locked" rounded="sm" opacity="0.90">
+              <b-card :aria-hidden="!course.locked ? 'true' : null">
+                <b-card v-for="module in course.modules" v-bind:key="module.index" class="course" v-show="course.locked == false">
                   <div class="courseTitle">
-                    <div v-if="course.complete" class="complete">
+                    <div v-if="module.complete" class="complete">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
                     </div>
                     <h3>
-                      {{ course.name }}
+                      {{ module.name }}
                     </h3>
                     <div class="courseSubheader">
-                      <div v-if="!course.viewCompleted">
-                        <span @click="course.viewCompleted=!course.viewCompleted">
+                      <div v-if="!module.viewCompleted">
+                        <span @click="module.viewCompleted=!module.viewCompleted">
                           &bull; show completed
                         </span>
                       </div>
                       <div v-else>
-                        <span @click="course.viewCompleted=!course.viewCompleted">
+                        <span @click="module.viewCompleted=!module.viewCompleted">
                           &bull; hide completed
                         </span>
                       </div>
                     </div>
                   </div>
 
-                  <b-list-group v-show="course.complete == false || course.viewCompleted == true">
-                    <b-list-group-item v-for="unit in course.units" v-bind:key="unit.index" class="unit">
-                      <div class="unitTitle">
-                        <svg v-if="unit.complete" class="complete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
-                        <h5>{{ unit.name }}</h5>
-                      </div>
-
-                      <b-list-group-item v-show="unit.complete == false || course.viewCompleted == true" v-for="assignment in unit.assignments" v-bind:key="assignment.index" class="assignment" v-bind:variant="assignment.complete ? 'success' : ''">
-                        <div class="assignmentTitle">
-                          <svg v-if="assignment.type == 'reading'" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-                          <svg v-if="assignment.type == 'quiz'" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                          <svg v-if="assignment.type == 'video'" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-                          <svg v-if="assignment.type == 'coding'" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                          <svg v-if="assignment.type == 'project'" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" focusable="false" class="chakra-icon css-13otjrl" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-                          <div>
-                            {{ assignment.name }}
-                          </div>
-                        </div>
-                      </b-list-group-item>
+                  <b-list-group v-show="module.complete == false || module.viewCompleted == true">
+                    <b-list-group-item v-for="unit in module.units" v-bind:key="unit.index" class="unit">
+                      <b-container id="main">
+                        <b-row>
+                          <b-col>
+                            <div class="unitTitle">
+                              <svg v-if="unit.complete" class="complete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
+                              <h5>{{ unit.name }}</h5>
+                            </div>
+                          </b-col>
+                          <b-col>
+                            <div class="unitProgress">
+                              <div>{{ unit.ttc }}</div>
+                              <div>
+                                <b-progress :max="unit.lessonCount" height="22px" class="w-100">
+                                  <b-progress-bar style="overflow: visible" :value="unit.completedLessonCount" :variant="unit.completedLessonCount==unit.lessonCount ? 'success' : ''">
+                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} lessons</strong></span>
+                                  </b-progress-bar>
+                                </b-progress>
+                              </div>
+                            </div>
+                          </b-col>
+                        </b-row>
+                      </b-container>
                     </b-list-group-item>
                   </b-list-group>
                 </b-card>
@@ -90,26 +88,16 @@
 
 <script>
 export default {
-  head() {
-    return {
-      link: [
-        { rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/introjs.min.css' }
-      ],
-      script: [
-        { hid: "introjs", src: "https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.3.0/intro.min.js" },
-      ]
-    }
-  },
   data() {
     return {
-      assignmentTypes: ["reading", "video", "quiz", "project", "coding"],
-      paths: [
+      lessonTypes: ["reading", "video", "quiz", "project", "coding"],
+      courses: [
         {
           name: "Web Development Fundamentals",
           locked: false,
           unitCount: 10,
           assessmentCount: 2,
-          courses: [
+          modules: [
             {
               name: "Getting Started at App Academy",
               complete: false,
@@ -119,7 +107,9 @@ export default {
                   name: "Getting Started",
                   ttc: "49 mins",
                   complete: false,
-                  assignments: [
+                  lessonCount: 8,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: "How to Learn at App Academy",
                       complete: false,
@@ -168,12 +158,16 @@ export default {
               name: "Javascript Fundamentals",
               complete: false,
               viewCompleted: false,
+              lessonCount: 45,
+              completedLessonCount: 0,
               units: [
                 {
-                  name: "Intro to Javascript",
+                  name: "Data Types",
                   complete: false,
                   ttc: "1 hr and 29 mins",
-                  assignments: [
+                  lessonCount: 18,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `A Particularly Long and Detailed "Hello World!"`,
                       complete: false,
@@ -270,7 +264,9 @@ export default {
                   name: "Intro to Functions",
                   complete: false,
                   ttc: "1 hr and 46 mins",
-                  assignments: [
+                  lessonCount: 17,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Functions`,
                       complete: false,
@@ -359,10 +355,12 @@ export default {
                     }
                   ]
                 }, {
-                  name: "Intro to Control Flow",
+                  name: "Control Flow",
                   complete: false,
                   ttc: "39 mins",
-                  assignments: [
+                  lessonCount: 7,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Conditionals`,
                       complete: false,
@@ -401,10 +399,12 @@ export default {
                     }
                   ]
                 }, {
-                  name: "Javascript Fundamentals Assessment",
+                  name: "Javascript Fundamentals Formative Quiz",
                   complete: false,
                   ttc: "3 hrs",
-                  assignments: [
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Assessment Expectations`,
                       complete: false,
@@ -428,12 +428,16 @@ export default {
               name: "HTML and CSS Fundamentals",
               complete: false,
               viewCompleted: false,
+              lessonCount: 34,
+              completedLessonCount: 0,
               units: [
                 {
                   name: "HTML Basics",
                   complete: false,
                   ttc: "1 hr and 58 mins",
-                  assignments: [
+                  lessonCount: 11,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Hello HTML`,
                       complete: false,
@@ -495,7 +499,9 @@ export default {
                   name: "HTML Forms",
                   complete: false,
                   ttc: "2 hrs and 3 mins",
-                  assignments: [
+                  lessonCount: 5,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `HTML Forms Overview`,
                       complete: false,
@@ -527,7 +533,9 @@ export default {
                   name: "CSS Basics",
                   complete: false,
                   ttc: "1 hr and 22 mins",
-                  assignments: [
+                  lessonCount: 6,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Intro to CSS`,
                       complete: false,
@@ -564,7 +572,9 @@ export default {
                   name: "CSS Layout & Transitions",
                   complete: false,
                   ttc: "3 hrs",
-                  assignments: [
+                  lessonCount: 9,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `The Box Model`,
                       complete: false,
@@ -616,7 +626,9 @@ export default {
                   name: "HTML & CSS Assessment",
                   complete: false,
                   ttc: "3 hrs",
-                  assignments: [
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
                     {
                       name: `Assessment Expectations`,
                       complete: false,
@@ -638,201 +650,10 @@ export default {
               ]
             }
           ]
-        }, {
-          name: "Front-End Engineering",
-          locked: true,
-          unitCount: 15,
-          assessmentCount: 2,
-          courses: [
-            {
-              name: "Dummy text",
-              complete: false,
-              units: [
-                {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }, {
-          name: "Back-End Engineering",
-          locked: true,
-          unitCount: 17,
-          assessmentCount: 3,
-          courses: [
-            {
-              name: "Dummy text",
-              complete: false,
-              units: [
-                {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }, {
-                  name: "Dummy text",
-                  complete: false,
-                  ttc: "1 hr and 58 mins",
-                  assignments: [
-                    {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }, {
-                      name: `Dummy text`,
-                      complete: false,
-                      ttc: "10 mins",
-                      type: "coding"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
         }
       ]
     }
   },
-  mounted() {
-    setTimeout(() => {
-      introJs().setOptions({
-        steps: [{
-          title: 'Welcome! 👋',
-          intro: `Let's show you around!`
-        },
-        {
-          element: document.querySelector('.course'),
-          intro: `This is the first course you'll take on your journey to become a software engineer.`
-        },
-        {
-          element: document.querySelector('.courseSubheader'),
-          intro: `As you complete courses and assignments we'll hide them, to keep you focused on the next assignment...`
-        },
-        {
-          element: document.querySelector('.courseSubheader'),
-          intro: `If you want to view completed assignments you'll be able to click here to see them again.<br><img style="width:100%" src="https://i.giphy.com/media/ujUdrdpX7Ok5W/giphy.webp" onerror="this.onerror=null;this.src=\'https://i.giphy.com/ujUdrdpX7Ok5W.gif\';" alt="">`
-        },
-        {
-          element: document.querySelector('.locked'),
-          intro: `As you complete content you'll unlock new content.`
-        },
-        {
-          title: 'In the unknown...',
-          element: document.querySelector('.assignment'),
-          intro: `Let's get started by clicking on your first lesson!<br><img style="width:100%" src="https://pa1.narvii.com/7104/1c245f348c87df495a20f38cf36caadd2b04e3fcr1-480-201_hq.gif" alt="">`
-        }]
-      }).start();
-    }, 500)
-  }
 };
 </script>
 
@@ -876,6 +697,10 @@ body {
   margin: 0px;
 }
 
+.course {
+  border: 0px;
+}
+
 .course .complete svg {
   width: 27px;
   height: 27px;
@@ -889,8 +714,16 @@ body {
   align-items: center;
 }
 
+.unit:first-child {
+  margin-top: 15px;
+}
+
 .unit {
-  border: 0px;
+
+}
+
+.unitProgress {
+
 }
 
 .unitTitle {
@@ -898,6 +731,7 @@ body {
   flex-direction: row;
   align-items: center;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .unitTitle h5 {
