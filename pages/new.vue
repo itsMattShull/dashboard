@@ -58,7 +58,7 @@
                               <div>
                                 <b-progress :max="unit.lessonCount" height="22px" class="w-100">
                                   <b-progress-bar style="overflow: visible" :value="unit.completedLessonCount" :variant="unit.completedLessonCount==unit.lessonCount ? 'success' : ''">
-                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} lessons</strong></span>
+                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} practices</strong></span>
                                   </b-progress-bar>
                                 </b-progress>
                               </div>
