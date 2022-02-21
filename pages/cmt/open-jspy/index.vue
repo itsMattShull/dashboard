@@ -1,91 +1,16 @@
 <template>
   <div>
-    <b-nav>
-      <b-nav-item active>Home</b-nav-item>
-      <b-nav-item>Log In</b-nav-item>
-    </b-nav>
-
-    <b-container id="main">
-      <b-row>
-        <b-col>
-          <b-alert show
-            ><a href="#">Complete your onboarding</a> to get the most out of
-            your experience.</b-alert
-          >
-        </b-col>
-      </b-row>
-
-      <b-row class="content">
-        <b-col>
-          <div v-for="course in courses" v-bind:key="course.index" class="path">
-            <h2>
-              {{ course.name }}
-            </h2>
-            <b-overlay :show="course.locked" rounded="sm" opacity="0.90">
-              <b-card :aria-hidden="!course.locked ? 'true' : null">
-                <b-card v-for="module in course.modules" v-bind:key="module.index" class="course" v-show="course.locked == false">
-                  <div class="courseTitle">
-                    <div v-if="module.complete" class="complete">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
-                    </div>
-                    <h3>
-                      {{ module.name }}
-                    </h3>
-                    <div class="courseSubheader">
-                      <div v-if="!module.viewCompleted">
-                        <span @click="module.viewCompleted=!module.viewCompleted">
-                          &bull; show completed
-                        </span>
-                      </div>
-                      <div v-else>
-                        <span @click="module.viewCompleted=!module.viewCompleted">
-                          &bull; hide completed
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <b-list-group v-show="module.complete == false || module.viewCompleted == true">
-                    <b-list-group-item v-for="unit in module.units" v-bind:key="unit.index" class="unit">
-                      <b-container id="main">
-                        <b-row>
-                          <b-col>
-                            <div class="unitTitle">
-                              <svg v-if="unit.complete" class="complete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" enable-background="new 0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff"/><path d="M32,2C15.431,2,2,15.432,2,32c0,16.568,13.432,30,30,30c16.568,0,30-13.432,30-30C62,15.432,48.568,2,32,2z M25.025,50  l-0.02-0.02L24.988,50L11,35.6l7.029-7.164l6.977,7.184l21-21.619L53,21.199L25.025,50z" fill="#43a047"/></svg>
-                              <h5>{{ unit.name }}</h5>
-                            </div>
-                          </b-col>
-                          <b-col>
-                            <div class="unitProgress">
-                              <div>{{ unit.ttc }}</div>
-                              <div>
-                                <b-progress :max="unit.lessonCount" height="22px" class="w-100">
-                                  <b-progress-bar style="overflow: visible" :value="unit.completedLessonCount" :variant="unit.completedLessonCount==unit.lessonCount ? 'success' : ''">
-                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} practices</strong></span>
-                                  </b-progress-bar>
-                                </b-progress>
-                              </div>
-                            </div>
-                          </b-col>
-                        </b-row>
-                      </b-container>
-                    </b-list-group-item>
-                  </b-list-group>
-                </b-card>
-              </b-card>
-              <template #overlay>
-                <div class="lockedContent">
-                  <b-icon icon="lock" font-scale="3" style="width:27px;"></b-icon>
-                  <div>
-                    Complete "Web Development Fundamentals" to unlock this content
-                  </div>
-                </div>
-              </template>
-            </b-overlay>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
+    <section class="nav">
+      <h1>Courses</h1>
+      <div>
+          <b-button variant="info">Add Course</b-button>
+      </div>
+    </section>
+    <section>
+      <b-list-group>
+        <b-list-group-item v-for="course in courses" :key="course.index"><a :href="`/cmt/open-jspy/${course.slug}`">{{course.name}}</a></b-list-group-item>
+      </b-list-group>
+    </section>
   </div>
 </template>
 
@@ -96,61 +21,63 @@ export default {
       lessonTypes: ["reading", "video", "quiz", "project", "coding"],
       courses: [
         {
+          slug: 'web-development-fundamentals',
           name: "Web Development Fundamentals",
           locked: false,
           unitCount: 10,
           assessmentCount: 2,
           modules: [
             {
+              slug: "getting-started-at-app-academy",
               name: "Getting Started at App Academy",
-              complete: false,
+              complete: true,
               viewCompleted: false,
               units: [
                 {
                   name: "Getting Started",
                   ttc: "49 mins",
-                  complete: false,
+                  complete: true,
                   lessonCount: 8,
-                  completedLessonCount: 0,
+                  completedLessonCount: 8,
                   lessons: [
                     {
                       name: "How to Learn at App Academy",
-                      complete: false,
+                      complete: true,
                       ttc: "10 mins",
                       type: "video"
                     }, {
                       name: "How to Manage Difficulty",
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "reading"
                     }, {
                       name: "How to Succeed at App Academy",
-                      complete: false,
+                      complete: true,
                       ttc: "10 mins",
                       type: "quiz"
                     }, {
                       name: "Documenting My Expectations",
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "reading"
                     }, {
                       name: "How to Ask Great Questions",
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "reading"
                     }, {
                       name: "The Secret to Solving Any Problem",
-                      complete: false,
+                      complete: true,
                       ttc: "7 mins",
                       type: "reading"
                     }, {
                       name: "Polya's Problem Solving Framework",
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "quiz"
                     }, {
                       name: "Using Online Resources and Documentation",
-                      complete: false,
+                      complete: true,
                       ttc: "2 mins",
                       type: "reading"
                     }
@@ -158,107 +85,108 @@ export default {
                 }
               ]
             }, {
+              slug: "javascript-fundamentals123",
               name: "Javascript Fundamentals",
               complete: false,
               viewCompleted: false,
               lessonCount: 45,
-              completedLessonCount: 0,
+              completedLessonCount: 17,
               units: [
                 {
                   name: "Data Types",
-                  complete: false,
+                  complete: true,
                   ttc: "1 hr and 29 mins",
                   lessonCount: 18,
-                  completedLessonCount: 0,
+                  completedLessonCount: 18,
                   lessons: [
                     {
                       name: `A Particularly Long and Detailed "Hello World!"`,
-                      complete: false,
+                      complete: true,
                       ttc: "10 mins",
                       type: "reading"
                     }, {
                       name: `"Hello World!" REPL`,
-                      complete: false,
+                      complete: true,
                       ttc: "10 mins",
                       type: "coding"
                     }, {
                       name: `Intro to Javascript`,
-                      complete: false,
+                      complete: true,
                       ttc: "3 mins",
                       type: "reading"
                     }, {
                       name: `The Number Data Type`,
-                      complete: false,
+                      complete: true,
                       ttc: "2 mins",
                       type: "reading"
                     }, {
                       name: `The Number Data Type Demo`,
-                      complete: false,
+                      complete: true,
                       ttc: "9 mins",
                       type: "video"
                     }, {
                       name: `Numbers Exercise`,
-                      complete: false,
+                      complete: true,
                       ttc: "4 mins",
                       type: "coding"
                     }, {
                       name: `Artithmetic Operators`,
-                      complete: false,
+                      complete: true,
                       ttc: "7 mins",
                       type: "quiz"
                     }, {
                       name: `The Boolean Data Type`,
-                      complete: false,
+                      complete: true,
                       ttc: "2 mins",
                       type: "reading"
                     }, {
                       name: `The Boolean Data Type Lecture`,
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "video"
                     }, {
                       name: `The Boolean Data Type Demo`,
-                      complete: false,
+                      complete: true,
                       ttc: "4 mins",
                       type: "video"
                     }, {
                       name: `Boolean Exercise`,
-                      complete: false,
+                      complete: true,
                       ttc: "7 mins",
                       type: "coding"
                     }, {
                       name: `Variables`,
-                      complete: false,
+                      complete: true,
                       ttc: "3 mins",
                       type: "reading"
                     }, {
                       name: `Variables Demo`,
-                      complete: false,
+                      complete: true,
                       ttc: "11 mins",
                       type: "video"
                     }, {
                       name: `Variables Practice`,
-                      complete: false,
+                      complete: true,
                       ttc: "4 mins",
                       type: "coding"
                     }, {
                       name: `Variables Quiz`,
-                      complete: false,
+                      complete: true,
                       ttc: "5 mins",
                       type: "quiz"
                     }, {
                       name: `The String Data Type`,
-                      complete: false,
+                      complete: true,
                       ttc: "3 mins",
                       type: "reading"
                     }, {
                       name: `String Type Lecture`,
-                      complete: false,
+                      complete: true,
                       ttc: "6 mins",
                       type: "video"
                     }, {
                       name: `String Type Demo`,
-                      complete: false,
+                      complete: true,
                       ttc: "8 mins",
                       type: "video"
                     }
@@ -268,26 +196,26 @@ export default {
                   complete: false,
                   ttc: "1 hr and 46 mins",
                   lessonCount: 17,
-                  completedLessonCount: 0,
+                  completedLessonCount: 4,
                   lessons: [
                     {
                       name: `Functions`,
-                      complete: false,
+                      complete: true,
                       ttc: "9 mins",
                       type: "reading"
                     }, {
                       name: `Parameters and Arguments`,
-                      complete: false,
+                      complete: true,
                       ttc: "2 mins",
                       type: "reading"
                     }, {
                       name: `Functions Lecture`,
-                      complete: false,
+                      complete: true,
                       ttc: "9 mins",
                       type: "video"
                     }, {
                       name: `Intro to Functions Quiz`,
-                      complete: false,
+                      complete: true,
                       ttc: "6 mins",
                       type: "quiz"
                     }, {
@@ -428,6 +356,7 @@ export default {
                 }
               ]
             }, {
+              slug: "html-and-css-fundamentals",
               name: "HTML and CSS Fundamentals",
               complete: false,
               viewCompleted: false,
@@ -651,10 +580,115 @@ export default {
                   ]
                 }
               ]
+            }, {
+              slug: "local-javascript",
+              name: "Local Javascript",
+              complete: true,
+              viewCompleted: false,
+              units: [
+                {
+                  name: "Getting Started with Node",
+                  ttc: "49 mins",
+                  complete: true,
+                  lessonCount: 8,
+                  completedLessonCount: 8,
+                  lessons: [
+                    {
+                      name: "Basic Setup",
+                      isLesson: true,
+                      practices: [
+                        {
+                          name: "Node.js",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }, {
+                          name: "Running Your Code",
+                          complete: true,
+                          ttc: "2 mins",
+                          type: "coding"
+                        }, {
+                          name: "Hello World Terminal",
+                          complete: true,
+                          ttc: "2 mins",
+                          type: "coding"
+                        }
+                      ]
+                    }, {
+                      name: "Javascript Unit Tests",
+                      isLesson: true,
+                      practices: [
+                        {
+                          name: "A Brief Intro to Unit Tests",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }
+                      ]
+                    }
+                  ]
+                }, {
+                  name: "Local Javascript Practice",
+                  ttc: "49 mins",
+                  complete: true,
+                  lessonCount: 8,
+                  completedLessonCount: 8,
+                  lessons: [
+                    {
+                      name: "",
+                      isLesson: true,
+                      practices: [
+                        {
+                          name: "Local Javascript Practice",
+                          complete: true,
+                          ttc: "10 mins",
+                          type: "video"
+                        }, {
+                          name: "Refactoring Javascript Practice",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }, {
+                          name: "Non-standard For Loops",
+                          complete: true,
+                          ttc: "10 mins",
+                          type: "quiz"
+                        }, {
+                          name: "Non-Standard For Loops Quiz",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }, {
+                          name: "Non-Standard For Loops Practice",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }
+                      ]
+                    }, {
+                      name: "HTML / CSS Unit Tests",
+                      isLesson: true,
+                      practices: [
+                        {
+                          name: "Intro to Cypress Testing",
+                          complete: true,
+                          ttc: "5 mins",
+                          type: "reading"
+                        }, {
+                          name: "Cypress Practice - HTML Forms Debugging",
+                          complete: true,
+                          ttc: "2 mins",
+                          type: "coding"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
           ]
-        },
-        {
+        }, {
+          slug: 'javascript-fundamentals',
           name: "JavaScript Fundamentals",
           locked: false,
           unitCount: 10,
@@ -1220,114 +1254,8 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  background: #F1F1F0;
-}
-
-#main {
-  margin-top: 15px;
-}
-
 .nav {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
-  background: white;
-  padding: 10px 15px;
-}
-
-.path {
-  margin-bottom: 20px;
-}
-
-.content .path:not(:first-child):not(:last-child) {
-  margin: 20px 0px;
-}
-
-.path .course:not(:first-child):not(:last-child) {
-  margin: 10px 0px;
-}
-
-.subheader {
-  font-size: 12px;
-  margin: -10px 0px 20px;
-}
-
-.courseTitle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.courseTitle h3 {
-  margin: 0px;
-}
-
-.course {
-  border: 0px;
-}
-
-.course .complete svg {
-  width: 27px;
-  height: 27px;
-  margin-right: 5px;
-}
-
-.lockedContent {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-}
-
-.unit:first-child {
-  margin-top: 15px;
-}
-
-.unit {
-
-}
-
-.unitProgress {
-
-}
-
-.unitTitle {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.unitTitle h5 {
-  margin: 0px;
-}
-
-.unit svg {
-  width: 18px;
-  height: 18px;
-  margin-right: 5px;
-}
-
-.courseSubheader span {
-  cursor: pointer;
-}
-
-.assignmentTitle {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.assignmentTitle svg {
-  width: 16px;
-  height: 16px;
-}
-
-.assignment.complete {
-  background: gray;
-  color: lightgray;
 }
 </style>

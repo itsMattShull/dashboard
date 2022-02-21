@@ -18,6 +18,9 @@
       <b-row class="content">
         <b-col>
           <div v-for="course in courses" v-bind:key="course.index" class="path">
+            <h2>
+              {{ course.name }}
+            </h2>
             <b-overlay :show="course.locked" rounded="sm" opacity="0.90">
               <b-card :aria-hidden="!course.locked ? 'true' : null">
                 <b-card v-for="module in course.modules" v-bind:key="module.index" class="course" v-show="course.locked == false">
@@ -43,7 +46,7 @@
                   </div>
 
                   <b-list-group v-show="module.complete == false || module.viewCompleted == true">
-                    <b-list-group-item v-for="unit in module.units" v-bind:key="unit.index" class="unit">
+                    <b-list-group-item v-for="unit in module.units" v-bind:key="unit.index" class="unit" v-show="unit.complete == false || module.viewCompleted == true">
                       <b-container id="main">
                         <b-row>
                           <b-col>
@@ -58,7 +61,7 @@
                               <div>
                                 <b-progress :max="unit.lessonCount" height="22px" class="w-100">
                                   <b-progress-bar style="overflow: visible" :value="unit.completedLessonCount" :variant="unit.completedLessonCount==unit.lessonCount ? 'success' : ''">
-                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} lessons</strong></span>
+                                    <span>Progress: <strong>{{ unit.completedLessonCount }} / {{ unit.lessonCount }} practices</strong></span>
                                   </b-progress-bar>
                                 </b-progress>
                               </div>
@@ -650,6 +653,564 @@ export default {
               ]
             }
           ]
+        }, {
+          name: "JavaScript Fundamentals",
+          locked: false,
+          unitCount: 10,
+          assessmentCount: 2,
+          modules: [
+            {
+              name: "Getting Started at App Academy",
+              complete: false,
+              viewCompleted: false,
+              units: [
+                {
+                  name: "Getting Started",
+                  ttc: "49 mins",
+                  complete: false,
+                  lessonCount: 8,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: "How to Learn at App Academy",
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "video"
+                    }, {
+                      name: "How to Manage Difficulty",
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: "How to Succeed at App Academy",
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "quiz"
+                    }, {
+                      name: "Documenting My Expectations",
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: "How to Ask Great Questions",
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: "The Secret to Solving Any Problem",
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "reading"
+                    }, {
+                      name: "Polya's Problem Solving Framework",
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "quiz"
+                    }, {
+                      name: "Using Online Resources and Documentation",
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }
+                  ]
+                }
+              ]
+            }, {
+              name: "Javascript Fundamentals",
+              complete: false,
+              viewCompleted: false,
+              lessonCount: 45,
+              completedLessonCount: 0,
+              units: [
+                {
+                  name: "Data Types",
+                  complete: false,
+                  ttc: "1 hr and 29 mins",
+                  lessonCount: 18,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `A Particularly Long and Detailed "Hello World!"`,
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "reading"
+                    }, {
+                      name: `"Hello World!" REPL`,
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "coding"
+                    }, {
+                      name: `Intro to Javascript`,
+                      complete: false,
+                      ttc: "3 mins",
+                      type: "reading"
+                    }, {
+                      name: `The Number Data Type`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `The Number Data Type Demo`,
+                      complete: false,
+                      ttc: "9 mins",
+                      type: "video"
+                    }, {
+                      name: `Numbers Exercise`,
+                      complete: false,
+                      ttc: "4 mins",
+                      type: "coding"
+                    }, {
+                      name: `Artithmetic Operators`,
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "quiz"
+                    }, {
+                      name: `The Boolean Data Type`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `The Boolean Data Type Lecture`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "video"
+                    }, {
+                      name: `The Boolean Data Type Demo`,
+                      complete: false,
+                      ttc: "4 mins",
+                      type: "video"
+                    }, {
+                      name: `Boolean Exercise`,
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "coding"
+                    }, {
+                      name: `Variables`,
+                      complete: false,
+                      ttc: "3 mins",
+                      type: "reading"
+                    }, {
+                      name: `Variables Demo`,
+                      complete: false,
+                      ttc: "11 mins",
+                      type: "video"
+                    }, {
+                      name: `Variables Practice`,
+                      complete: false,
+                      ttc: "4 mins",
+                      type: "coding"
+                    }, {
+                      name: `Variables Quiz`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "quiz"
+                    }, {
+                      name: `The String Data Type`,
+                      complete: false,
+                      ttc: "3 mins",
+                      type: "reading"
+                    }, {
+                      name: `String Type Lecture`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "video"
+                    }, {
+                      name: `String Type Demo`,
+                      complete: false,
+                      ttc: "8 mins",
+                      type: "video"
+                    }
+                  ]
+                }, {
+                  name: "Intro to Functions",
+                  complete: false,
+                  ttc: "1 hr and 46 mins",
+                  lessonCount: 17,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Functions`,
+                      complete: false,
+                      ttc: "9 mins",
+                      type: "reading"
+                    }, {
+                      name: `Parameters and Arguments`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `Functions Lecture`,
+                      complete: false,
+                      ttc: "9 mins",
+                      type: "video"
+                    }, {
+                      name: `Intro to Functions Quiz`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "quiz"
+                    }, {
+                      name: `Goodbye (*)`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "coding"
+                    }, {
+                      name: `Goodbye Walkthrough`,
+                      complete: false,
+                      ttc: "8 mins",
+                      type: "video"
+                    }, {
+                      name: `Muscle Memory`,
+                      complete: false,
+                      ttc: "12 mins",
+                      type: "coding"
+                    }, {
+                      name: `Plus 5`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "coding"
+                    }, {
+                      name: `Call This Function`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "coding"
+                    }, {
+                      name: `Average of Two`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "coding"
+                    }, {
+                      name: `Hello`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "coding"
+                    }, {
+                      name: `Divide by Three`,
+                      complete: false,
+                      ttc: "4 mins",
+                      type: "coding"
+                    }, {
+                      name: `Whisper`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "coding"
+                    }, {
+                      name: `Average of Four`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "coding"
+                    }, {
+                      name: `Average Walkthrough`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "video"
+                    }, {
+                      name: `Yell (*)`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "coding"
+                    }, {
+                      name: `Echo (*)`,
+                      complete: false,
+                      ttc: "6 mins",
+                      type: "coding"
+                    }
+                  ]
+                }, {
+                  name: "Control Flow",
+                  complete: false,
+                  ttc: "39 mins",
+                  lessonCount: 7,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Conditionals`,
+                      complete: false,
+                      ttc: "4 mins",
+                      type: "reading"
+                    }, {
+                      name: `Conditionals Demo`,
+                      complete: false,
+                      ttc: "8 mins",
+                      type: "video"
+                    }, {
+                      name: `Mutually Exclusive Conditions`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `Basic Loops`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: `Loops Demo`,
+                      complete: false,
+                      ttc: "8 mins",
+                      type: "video"
+                    }, {
+                      name: `Arrays`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: `Array Lecture`,
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "video"
+                    }
+                  ]
+                }, {
+                  name: "Javascript Fundamentals Formative Quiz",
+                  complete: false,
+                  ttc: "3 hrs",
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Assessment Expectations`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `Assessment Quiz`,
+                      complete: false,
+                      ttc: "1 hr",
+                      type: "quiz"
+                    }, {
+                      name: `JavaScript Unit Test Problems`,
+                      complete: false,
+                      ttc: "2 hrs",
+                      type: "project"
+                    }
+                  ]
+                }
+              ]
+            }, {
+              name: "HTML and CSS Fundamentals",
+              complete: false,
+              viewCompleted: false,
+              lessonCount: 34,
+              completedLessonCount: 0,
+              units: [
+                {
+                  name: "HTML Basics",
+                  complete: false,
+                  ttc: "1 hr and 58 mins",
+                  lessonCount: 11,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Hello HTML`,
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "coding"
+                    }, {
+                      name: `Intro to HTML`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: `Intro to HTML Summary`,
+                      complete: false,
+                      ttc: "3 mins",
+                      type: "video"
+                    }, {
+                      name: `HTML Tags Summary`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "video"
+                    }, {
+                      name: `HTML Elements Reference I`,
+                      complete: false,
+                      ttc: "16 mins",
+                      type: "reading"
+                    }, {
+                      name: `HTML Elements Quiz I Directions`,
+                      complete: false,
+                      ttc: "1 min",
+                      type: "reading"
+                    }, {
+                      name: `HTML Elements Quiz I`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "quiz"
+                    }, {
+                      name: `HTML Tags Practice`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }, {
+                      name: `Debugging HTML Demo`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "video"
+                    }, {
+                      name: `Debugging HTML`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "coding"
+                    }, {
+                      name: `HTML Basics Quiz`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "quiz"
+                    }
+                  ]
+                }, {
+                  name: "HTML Forms",
+                  complete: false,
+                  ttc: "2 hrs and 3 mins",
+                  lessonCount: 5,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `HTML Forms Overview`,
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "reading"
+                    }, {
+                      name: `HTML Elements Reference II`,
+                      complete: false,
+                      ttc: "10 mins",
+                      type: "reading"
+                    }, {
+                      name: `HTML Elements Quiz II Directions`,
+                      complete: false,
+                      ttc: "1 min",
+                      type: "reading"
+                    }, {
+                      name: `HTML Elements Quiz II`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "reading"
+                    }, {
+                      name: `Building HTML Forms`,
+                      complete: false,
+                      ttc: "1 hr and 30 mins",
+                      type: "coding"
+                    }
+                  ]
+                }, {
+                  name: "CSS Basics",
+                  complete: false,
+                  ttc: "1 hr and 22 mins",
+                  lessonCount: 6,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Intro to CSS`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `CSS Selectors`,
+                      complete: false,
+                      ttc: "17 mins",
+                      type: "reading"
+                    }, {
+                      name: `Styling a Webpage with CSS`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }, {
+                      name: `Debugging CSS`,
+                      complete: false,
+                      ttc: "3 mins",
+                      type: "reading"
+                    }, {
+                      name: `Refactoring CSS`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "coding"
+                    }, {
+                      name: `CSS Basics Quiz`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "quiz"
+                    }
+                  ]
+                }, {
+                  name: "CSS Layout & Transitions",
+                  complete: false,
+                  ttc: "3 hrs",
+                  lessonCount: 9,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `The Box Model`,
+                      complete: false,
+                      ttc: "9 mins",
+                      type: "reading"
+                    }, {
+                      name: `CSS Positioning`,
+                      complete: false,
+                      ttc: "7 mins",
+                      type: "reading"
+                    }, {
+                      name: `Flexbox Froggy`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }, {
+                      name: `Flexbox Defense`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }, {
+                      name: `Grid Garden`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }, {
+                      name: `CSS Transitions`,
+                      complete: false,
+                      ttc: "5 mins",
+                      type: "reading"
+                    }, {
+                      name: `CSS Whack-A-Mole`,
+                      complete: false,
+                      ttc: "1 hr",
+                      type: "coding"
+                    }, {
+                      name: `CSS Quiz 2`,
+                      complete: false,
+                      ttc: "15 mins",
+                      type: "quiz"
+                    }, {
+                      name: `CSS Layout Practice`,
+                      complete: false,
+                      ttc: "30 mins",
+                      type: "coding"
+                    }
+                  ]
+                }, {
+                  name: "HTML & CSS Assessment",
+                  complete: false,
+                  ttc: "3 hrs",
+                  lessonCount: 3,
+                  completedLessonCount: 0,
+                  lessons: [
+                    {
+                      name: `Assessment Expectations`,
+                      complete: false,
+                      ttc: "2 mins",
+                      type: "reading"
+                    }, {
+                      name: `HTML & CSS Quiz`,
+                      complete: false,
+                      ttc: "1 hr",
+                      type: "quiz"
+                    }, {
+                      name: `HTML & CSS Assessment`,
+                      complete: false,
+                      ttc: "2 hrs",
+                      type: "project"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -672,6 +1233,10 @@ body {
   justify-content: space-between;
   background: white;
   padding: 10px 15px;
+}
+
+.path {
+  margin-bottom: 20px;
 }
 
 .content .path:not(:first-child):not(:last-child) {
@@ -763,5 +1328,9 @@ body {
 .assignment.complete {
   background: gray;
   color: lightgray;
+}
+
+.list-group-item + .list-group-item {
+ border-top-width: thin;
 }
 </style>
