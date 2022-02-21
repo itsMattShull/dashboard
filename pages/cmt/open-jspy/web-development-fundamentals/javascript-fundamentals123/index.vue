@@ -8,7 +8,7 @@
     </section>
     <section>
       <b-list-group>
-        <b-list-group-item v-for="unit in courses[0].modules[1].units" :key="unit.index"><a :href="`/cmt/open-jspy/web-development-fundamentals/javascript-fundamentals123/${unit.slug}`">{{unit.name}}</a></b-list-group-item>
+        <b-list-group-item v-for="unit in courses[0].modules[1].units" :key="unit.index"><a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/javascript-fundamentals123/${unit.slug}`">{{unit.name}}</a></b-list-group-item>
       </b-list-group>
     </section>
   </div>
