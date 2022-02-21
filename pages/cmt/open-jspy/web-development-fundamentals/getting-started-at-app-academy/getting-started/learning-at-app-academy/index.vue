@@ -1,24 +1,22 @@
 <template>
   <div>
     <section class="nav mb-15">
-      <h1>Lessons</h1>
+      <h1>Practices</h1>
       <div>
-          <b-button variant="info">Add Lesson</b-button>
+          <b-button variant="info">Add Practice</b-button>
       </div>
     </section>
     <section>
       <b-list-group>
-        <b-list-group-item v-for="lesson in courses[0].modules[0].units[0].lessons" :key="lesson.index" class="lesson">
-          <div class="lesson-title">
+        <b-list-group-item v-for="practice in courses[0].modules[0].units[0].lessons[0].practices" :key="practice.index" class="practice">
+          <div class="practice-title">
             <div>
-              <a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/getting-started-at-app-academy/getting-started/${lesson.slug}`">{{lesson.name}}</a>
+              {{practice.name}}
             </div>
-            <div>
-              <b-button-group>
-                <b-button variant="info">Edit</b-button>
-                <b-button variant="danger">Delete</b-button>
-              </b-button-group>
-            </div>
+            <b-button-group>
+            <b-button variant="info">Edit</b-button>
+            <b-button variant="danger">Delete</b-button>
+            </b-button-group>
           </div>
         </b-list-group-item>
       </b-list-group>
@@ -1289,7 +1287,7 @@ export default {
   justify-content: space-between;
 }
 
-.lesson-title, .practice {
+.practice-title {
   display: flex;
   align-items: center;
   justify-content: space-between;

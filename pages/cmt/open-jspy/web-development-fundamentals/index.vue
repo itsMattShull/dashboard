@@ -7,9 +7,19 @@
       </div>
     </section>
     <section>
-      <b-list-group>
-        <b-list-group-item v-for="module in courses[0].modules" :key="module.index"><a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/${module.slug}`">{{module.name}}</a></b-list-group-item>
-      </b-list-group>
+      <div>
+        <b-list-group>
+          <b-list-group-item v-for="module in courses[0].modules" :key="module.index" class="flex">
+            <a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/${module.slug}`">{{module.name}}</a>
+            <div>
+              <b-button-group>
+                <b-button variant="info">Edit</b-button>
+                <b-button variant="danger">Delete</b-button>
+              </b-button-group>
+            </div>
+          </b-list-group-item>
+        </b-list-group>
+      </div>
     </section>
   </div>
 </template>
@@ -1254,7 +1264,8 @@ export default {
 </script>
 
 <style>
-.nav {
+.nav, .flex {
+  display:flex;
   align-items: center;
   justify-content: space-between;
 }

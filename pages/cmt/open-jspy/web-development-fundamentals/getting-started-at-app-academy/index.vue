@@ -8,7 +8,15 @@
     </section>
     <section>
       <b-list-group>
-        <b-list-group-item v-for="unit in courses[0].modules[0].units" :key="unit.index"><a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/getting-started-at-app-academy/${unit.slug}`">{{unit.name}}</a></b-list-group-item>
+        <b-list-group-item v-for="unit in courses[0].modules[0].units" :key="unit.index" class="flex">
+          <a :href="`/dashboard/cmt/open-jspy/web-development-fundamentals/getting-started-at-app-academy/${unit.slug}`">{{unit.name}}</a>
+          <div>
+            <b-button-group>
+              <b-button variant="info">Edit</b-button>
+              <b-button variant="danger">Delete</b-button>
+            </b-button-group>
+          </div>
+        </b-list-group-item>
       </b-list-group>
     </section>
   </div>
@@ -1255,7 +1263,8 @@ export default {
 </script>
 
 <style>
-.nav {
+.nav, .flex {
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }

@@ -8,7 +8,15 @@
     </section>
     <section>
       <b-list-group>
-        <b-list-group-item v-for="course in courses" :key="course.index"><a :href="`/dashboard/cmt/open-jspy/${course.slug}`">{{course.name}}</a></b-list-group-item>
+        <b-list-group-item v-for="course in courses" :key="course.index" class="flex">
+          <a :href="`/dashboard/cmt/open-jspy/${course.slug}`">{{course.name}}</a>
+          <div>
+            <b-button-group>
+              <b-button variant="info">Edit</b-button>
+              <b-button variant="danger">Delete</b-button>
+            </b-button-group>
+          </div>
+        </b-list-group-item>
       </b-list-group>
     </section>
   </div>
@@ -1254,7 +1262,8 @@ export default {
 </script>
 
 <style>
-.nav {
+.nav, .flex {
+  display:flex;
   align-items: center;
   justify-content: space-between;
 }
