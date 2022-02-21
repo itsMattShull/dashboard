@@ -5,7 +5,7 @@
     </section>
     <section>
       <b-list-group>
-        <b-list-group-item><a href='/cmt/open-jspy'>a/A Open - JS/Py</a></b-list-group-item>
+        <b-list-group-item><a href='/dashboard/cmt/open-jspy'>a/A Open - JS/Py</a></b-list-group-item>
       </b-list-group>
     </section>
   </div>
