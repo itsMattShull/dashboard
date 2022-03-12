@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/cmt/open-jspy/web-development-fundamentals/html-and-css-fundamentals", {data:[{}],fetch:{},mutations:void 0});

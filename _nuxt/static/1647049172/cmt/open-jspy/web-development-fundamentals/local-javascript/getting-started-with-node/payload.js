@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/cmt/open-jspy/web-development-fundamentals/local-javascript/getting-started-with-node", {data:[{}],fetch:{},mutations:void 0});
